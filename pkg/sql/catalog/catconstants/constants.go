@@ -140,7 +140,7 @@ const (
 	CrdbInternalInvalidDescriptorsTableID
 	CrdbInternalClusterDatabasePrivilegesTableID
 	CrdbInternalInterleaved
-	CrdbInternalCrossDbRefrences
+	CrdbInternalCrossDbReferences
 	CrdbInternalLostTableDescriptors
 	CrdbInternalClusterInflightTracesTable
 	CrdbInternalRegionsTable

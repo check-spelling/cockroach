@@ -590,7 +590,7 @@ const (
 	planFlagContainsFullTableScan
 
 	// planFlagContainsFullIndexScan is set if the plan involves an unconstrained
-	// secondary index scan. This could be an unconstrainted scan of any
+	// secondary index scan. This could be an unconstrained scan of any
 	// cardinality.
 	planFlagContainsFullIndexScan
 

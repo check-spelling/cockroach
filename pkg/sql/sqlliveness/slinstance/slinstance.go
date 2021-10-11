@@ -283,7 +283,7 @@ func NewSQLInstance(
 	return l
 }
 
-// Start runs the hearbeat loop.
+// Start runs the heartbeat loop.
 func (l *Instance) Start(ctx context.Context) {
 	l.mu.Lock()
 	defer l.mu.Unlock()

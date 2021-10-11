@@ -221,7 +221,7 @@ func FatalChan() <-chan struct{} {
 	return logging.mu.fatalCh
 }
 
-// s ignalFatalCh signals the listeners of l.mu.fatalCh by closing the
+// signalFatalCh signals the listeners of l.mu.fatalCh by closing the
 // channel.
 // l.mu is not held.
 func (l *loggingT) signalFatalCh() {

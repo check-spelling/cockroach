@@ -3349,7 +3349,7 @@ func TestImportIntoCSV(t *testing.T) {
 		sqlDB.CheckQueryResults(t, `SELECT * FROM t`, [][]string{{"1", "2", "today"}})
 	})
 
-	// Tests behvior when the existing table being imported into has fewer columns
+	// Tests behavior when the existing table being imported into has fewer columns
 	// in its schema then the source CSV file.
 	t.Run("fewer-table-cols-than-csv", func(t *testing.T) {
 		sqlDB.Exec(t, `CREATE TABLE t (a INT)`)
@@ -3362,7 +3362,7 @@ func TestImportIntoCSV(t *testing.T) {
 	})
 
 	// Tests IMPORT INTO without any target columns specified. This implies an
-	// import of all columns in the exisiting table.
+	// import of all columns in the existing table.
 	t.Run("no-target-cols-specified", func(t *testing.T) {
 		sqlDB.Exec(t, `CREATE TABLE t (a INT PRIMARY KEY, b STRING)`)
 		defer sqlDB.Exec(t, `DROP TABLE t`)
@@ -7140,7 +7140,7 @@ func TestImportJobEventLogging(t *testing.T) {
 	backupccl.CheckEmittedEvents(t, expectedStatus, beforeSecondImport.UnixNano(), jobID, "import", "IMPORT")
 }
 
-func TestImportDefautIntSizeSetting(t *testing.T) {
+func TestImportDefaultIntSizeSetting(t *testing.T) {
 	defer leaktest.AfterTest(t)()
 	defer log.Scope(t).Close(t)
 	ctx := context.Background()

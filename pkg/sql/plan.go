@@ -104,7 +104,7 @@ type planNode interface {
 }
 
 // mutationPlanNode is a specification of planNode for mutations operations
-// (those that insert/update/detele/etc rows).
+// (those that insert/update/delete/etc rows).
 type mutationPlanNode interface {
 	planNode
 
@@ -594,7 +594,7 @@ const (
 	planFlagContainsFullTableScan
 
 	// planFlagContainsFullIndexScan is set if the plan involves an unconstrained
-	// non-partial secondary index scan. This could be an unconstrainted scan of
+	// non-partial secondary index scan. This could be an unconstrained scan of
 	// any cardinality.
 	planFlagContainsFullIndexScan
 

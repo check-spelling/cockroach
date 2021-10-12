@@ -463,7 +463,7 @@ func (tc *TxnCoordSender) Send(
 ) (*roachpb.BatchResponse, *roachpb.Error) {
 	// NOTE: The locking here is unusual. Although it might look like it, we are
 	// NOT holding the lock continuously for the duration of the Send. We lock
-	// here, and unlock at the botton of the interceptor stack, in the
+	// here, and unlock at the bottom of the interceptor stack, in the
 	// txnLockGatekeeper. The we lock again in that interceptor when the response
 	// comes, and unlock again in the defer below.
 	tc.mu.Lock()
@@ -586,7 +586,7 @@ func (tc *TxnCoordSender) Send(
 // of the gateway they use. This ensures that all causally dependent
 // transactions commit with higher timestamps, even if their read and writes
 // sets do not conflict with the original transaction's. This obviates the
-// need for uncertainty intervals and prevents the "causal reverse" anamoly
+// need for uncertainty intervals and prevents the "causal reverse" anomaly
 // which can be observed by a third, concurrent transaction.
 //
 // For more, see https://www.cockroachlabs.com/blog/consistency-model/ and
@@ -1277,7 +1277,7 @@ func (tc *TxnCoordSender) ManualRefresh(ctx context.Context) error {
 	tc.mu.Lock()
 	defer tc.mu.Unlock()
 
-	// Hijack the pre-emptive refresh code path to perform the refresh but
+	// Hijack the preemptive refresh code path to perform the refresh but
 	// provide the force flag to ensure that the refresh occurs unconditionally.
 	// We provide an empty BatchRequest - maybeRefreshPreemptivelyLocked just
 	// needs the transaction proto. The function then returns a BatchRequest

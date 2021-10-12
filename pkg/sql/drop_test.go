@@ -614,7 +614,7 @@ func TestDropTable(t *testing.T) {
 
 	// Test that deleted table cannot be used. This prevents
 	// regressions where name -> descriptor ID caches might make
-	// this statement erronously work.
+	// this statement erroneously work.
 	if _, err := sqlDB.Exec(
 		`SELECT * FROM t.kv`,
 	); !testutils.IsError(err, `relation "t.kv" does not exist`) {
@@ -1061,7 +1061,7 @@ CREATE TABLE test.t(a INT PRIMARY KEY);
 
 // Tests name reuse if a DROP VIEW|TABLE succeeds but fails
 // before running the schema changer. Tests name GC via the
-// asynchrous schema change path.
+// asynchronous schema change path.
 // TODO (lucy): This started as a test verifying that draining names still works
 // in the async schema changer, which no longer exists. Should the test still
 // exist?

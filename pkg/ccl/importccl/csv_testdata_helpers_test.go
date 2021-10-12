@@ -31,8 +31,8 @@ type csvTestFiles struct {
 	filesUsingWildcard, gzipFilesUsingWildcard, bzipFilesUsingWildcard []string
 }
 
-// Returns a single CSV file with a previously imported key sandiwched between
-// a set of unqiue keys. This is used to ensure that IMPORT does not allow
+// Returns a single CSV file with a previously imported key sandwiched between
+// a set of unique keys. This is used to ensure that IMPORT does not allow
 // ingestion of shadowing keys.
 func makeShadowKeyTestFile(t testing.TB, numRowsImportedBefore int, suffix string) {
 	if numRowsImportedBefore < 1 {

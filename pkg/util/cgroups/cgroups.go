@@ -323,7 +323,7 @@ func detectCPUUsageInV2(cRoot string) (stime, utime uint64, err error) {
 }
 
 // detectMemLimitInV1 finds the memory limit value for cgroup V1 via looking in
-// [contoller mount path]/memory.stat (cgroupV1MemStatFilename) for the
+// [controller mount path]/memory.stat (cgroupV1MemStatFilename) for the
 // cgroupV1MemLimitStatKey.
 func detectMemLimitInV1(cRoot string) (limit int64, warnings string, err error) {
 	return detectMemStatValue(cRoot, cgroupV1MemStatFilename, cgroupV1MemLimitStatKey, 1)
@@ -340,7 +340,7 @@ func detectMemLimitInV2(cRoot string) (limit int64, warnings string, err error) 
 }
 
 // detectMemUsageInV1 finds the memory usage value for cgroup V1 via looking in
-// [contoller mount path]/memory.usage_in_bytes (cgroupV1MemUsageFilename)
+// [controller mount path]/memory.usage_in_bytes (cgroupV1MemUsageFilename)
 func detectMemUsageInV1(cRoot string) (memUsage int64, warnings string, err error) {
 	return readInt64Value(cRoot, cgroupV1MemUsageFilename, 1)
 }
@@ -454,7 +454,7 @@ func detectCntrlPath(cgroupFilePath string, controller string) (string, error) {
 	return unifiedPathIfFound, nil
 }
 
-// Reads /proc/[pid]/mountinfo for cgoup or cgroup2 mount which defines the used version.
+// Reads /proc/[pid]/mountinfo for cgroup or cgroup2 mount which defines the used version.
 // See http://man7.org/linux/man-pages/man5/proc.5.html for `mountinfo` format.
 func getCgroupDetails(mountinfoPath string, cRoot string, controller string) (string, int, error) {
 	info, err := os.Open(mountinfoPath)

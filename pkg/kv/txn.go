@@ -1431,7 +1431,7 @@ func (txn *Txn) SetFixedTimestamp(ctx context.Context, ts hlc.Timestamp) error {
 //
 // The transaction's epoch is bumped, simulating to an extent what the
 // TxnCoordSender does on retriable errors. The transaction's timestamp is only
-// bumped to the extent that txn.ReadTimestamp is racheted up to txn.WriteTimestamp.
+// bumped to the extent that txn.ReadTimestamp is ratcheted up to txn.WriteTimestamp.
 // TODO(andrei): This method should take in an up-to-date timestamp, but
 // unfortunately its callers don't currently have that handy.
 func (txn *Txn) GenerateForcedRetryableError(ctx context.Context, msg string) error {
@@ -1495,7 +1495,7 @@ func (txn *Txn) ManualRestart(ctx context.Context, ts hlc.Timestamp) {
 //
 // Note that this method allows for false negatives: sometimes the client only
 // figures out that it's been pushed when it sends an EndTxn - i.e. it's
-// possible for the txn to have been pushed asynchoronously by some other
+// possible for the txn to have been pushed asynchronously by some other
 // operation (usually, but not exclusively, by a high-priority txn with
 // conflicting writes).
 func (txn *Txn) IsSerializablePushAndRefreshNotPossible() bool {

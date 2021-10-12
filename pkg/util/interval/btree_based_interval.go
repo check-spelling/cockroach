@@ -862,7 +862,7 @@ type copyOnWriteContext struct {
 // The internal tree structure of b is marked read-only and shared between t and
 // t2.  Writes to both t and t2 use copy-on-write logic, creating new nodes
 // whenever one of b's original nodes would have been modified.  Read operations
-// should have no performance degredation.  Write operations for both t and t2
+// should have no performance degradation.  Write operations for both t and t2
 // will initially experience minor slow-downs caused by additional allocs and
 // copies due to the aforementioned copy-on-write logic, but should converge to
 // the original performance characteristics of the original tree.
@@ -884,7 +884,7 @@ func (t *btree) Clone() Tree {
 	return t.cloneInternal()
 }
 
-// adjustRange sets the Range to the maximum extent of the childrens' Range
+// adjustRange sets the Range to the maximum extent of the children's Range
 // spans and its range spans.
 func (n *node) adjustRange() {
 	n.Range.Start = n.rangeStart()

@@ -84,7 +84,7 @@ type loggingT struct {
 	mu struct {
 		syncutil.Mutex
 
-		// disableDaemons can be used to turn off both the GC and flush deamons.
+		// disableDaemons can be used to turn off both the GC and flush daemons.
 		disableDaemons bool
 
 		// exitOverride is used when shutting down logging.
@@ -227,7 +227,7 @@ func (l *loggingT) idPayload() idPayload {
 	return l.idMu.idPayload
 }
 
-// s ignalFatalCh signals the listeners of l.mu.fatalCh by closing the
+// signalFatalCh signals the listeners of l.mu.fatalCh by closing the
 // channel.
 // l.mu is not held.
 func (l *loggingT) signalFatalCh() {
@@ -312,7 +312,7 @@ func (l *loggerT) outputLogEntry(entry logEntry) {
 		}
 
 		// Explain to the (human) user that we would like to hear from them.
-		entry.stacks = append(entry.stacks, []byte(fatalErrorPostamble)...)
+		entry.stacks = append(entry.stacks, []byte(fatalErrorSuffix)...)
 
 		// We don't want to hang forever writing our final log message. If
 		// things are broken (for example, if the disk fills up and there
@@ -461,7 +461,7 @@ func setActive() {
 	}
 }
 
-const fatalErrorPostamble = `
+const fatalErrorSuffix = `
 
 ****************************************************************************
 

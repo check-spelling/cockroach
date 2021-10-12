@@ -247,7 +247,7 @@ func TestAlterTableLocalityRegionalByRowError(t *testing.T) {
 	// testCases contain a base table structure to start off as.
 	// For each of these test cases, we pick either the alter state corresponding
 	// to the base table's locality -- for REGIONAL BY ROW tables we pick
-	// regionalyByRowAlterStates and for GLOBAL/REGIONAL BY TABLE tables we pick
+	// regionalByRowAlterStates and for GLOBAL/REGIONAL BY TABLE tables we pick
 	// nonRegionalByRowAlterStates.
 	testCases := []struct {
 		desc           string
@@ -570,7 +570,7 @@ func TestIndexCleanupAfterAlterFromRegionalByRow(t *testing.T) {
 		t.Run(tc.locality, func(t *testing.T) {
 			knobs := base.TestingKnobs{
 				Store: &kvserver.StoreTestingKnobs{
-					// Disable the merge queue because it makes this test flakey
+					// Disable the merge queue because it makes this test flaky
 					// under stress. Consider changing this when admin commands are
 					// better synchronized leading to less thrashing of the range cache.
 					// We may also need to retry ClearRange operations which bump into

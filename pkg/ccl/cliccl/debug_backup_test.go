@@ -626,7 +626,7 @@ func TestExportDataAOST(t *testing.T) {
 			expectedData: "1,123,'foo cat'\n7,723,'cockroach'\n",
 		},
 		{
-			name:         "show-data-with-rev-history-as-of-time-after-deteletion-should-work-in-a-single-full-backup",
+			name:         "show-data-with-rev-history-as-of-time-after-deletion-should-work-in-a-single-full-backup",
 			tableName:    "testDB.fooschema.fooTable",
 			backupPaths:  []string{backupPathWithRev},
 			asof:         ts1.AsOfSystemTime(),
@@ -643,7 +643,7 @@ func TestExportDataAOST(t *testing.T) {
 			expectedData: "1,123,'foo cat'\n7,723,'cockroach'\n",
 		},
 		{
-			name:      "show-data-with-rev-history-as-of-time-after-deteletion-should-work-in-a-chain-of-backups",
+			name:      "show-data-with-rev-history-as-of-time-after-deletion-should-work-in-a-chain-of-backups",
 			tableName: "testDB.fooschema.fooTable",
 			backupPaths: []string{
 				backupPathWithRev,
@@ -782,7 +782,7 @@ func TestExportDataWithRevisions(t *testing.T) {
 			"",
 		},
 		{
-			"show-data-revisions-after-adding-an-colum",
+			"show-data-revisions-after-adding-a-column",
 			"testDB.public.fooTable",
 			[]string{
 				backupPathWithRev,
@@ -793,7 +793,7 @@ func TestExportDataWithRevisions(t *testing.T) {
 			ts2.AsOfSystemTime(),
 		},
 		{
-			"show-data-revisions-after-dropping-an-colum-and-update-value",
+			"show-data-revisions-after-dropping-a-column-and-update-value",
 			"testDB.public.fooTable",
 			[]string{
 				backupPathWithRev,

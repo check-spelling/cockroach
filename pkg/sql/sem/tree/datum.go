@@ -229,7 +229,7 @@ func (d Datums) IsDistinctFrom(evalCtx *EvalContext, other Datums) bool {
 // colinfo.HasCompositeKeyEncoding.
 type CompositeDatum interface {
 	Datum
-	// IsComposite returns true if this datum is not round-tripable in a key
+	// IsComposite returns true if this datum is not round-trippable in a key
 	// encoding.
 	IsComposite() bool
 }
@@ -4165,7 +4165,7 @@ func (d *DArray) IsComposite() bool {
 }
 
 // FirstIndex returns the first index of the array. 1 for normal SQL arrays,
-// which are 1-indexed, and 0 for the special Postgers vector types which are
+// which are 1-indexed, and 0 for the special Postgres vector types which are
 // 0-indexed.
 func (d *DArray) FirstIndex() int {
 	switch d.customOid {

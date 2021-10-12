@@ -1111,7 +1111,7 @@ func backupAndRestore(
 	} else {
 		// Start a new cluster to restore into.
 		// If the backup is on nodelocal, we need to determine which node it's on.
-		// Othewise, default to 0.
+		// Otherwise, default to 0.
 		backupNodeID := 0
 		if err != nil {
 			t.Fatal(err)
@@ -3937,7 +3937,7 @@ func TestRestoreAsOfSystemTime(t *testing.T) {
 	sqlDB.Exec(t, `UPDATE data.bank SET balance = 1`)
 	sqlDB.QueryRow(t, `SELECT cluster_logical_timestamp()`).Scan(&ts[1])
 
-	// Change the data in the tabe.
+	// Change the data in the table.
 	sqlDB.Exec(t, `CREATE TABLE data.teller (id INT PRIMARY KEY, name STRING)`)
 	sqlDB.Exec(t, `INSERT INTO data.teller VALUES (1, 'alice'), (7, 'bob'), (3, 'eve')`)
 
@@ -4435,7 +4435,7 @@ func setupBackupEncryptedTest(ctx context.Context, t *testing.T, sqlDB *sqlutils
 	// Create a table with a name and content that we never see in cleartext in a
 	// backup. And while the content and name are user data and metadata, by also
 	// partitioning the table at the sentinel value, we can ensure it also appears
-	// in the *backup* metadata as well (since partion = range boundary = backup
+	// in the *backup* metadata as well (since partition = range boundary = backup
 	// file boundary that is recorded in metadata).
 	sqlDB.Exec(t, `CREATE DATABASE neverappears`)
 	sqlDB.Exec(t, `CREATE TABLE neverappears.neverappears (
@@ -5274,7 +5274,7 @@ func TestBackupRestoreIncrementalAddTableMissing(t *testing.T) {
 	)
 }
 
-func TestBackupRestoreIncrementalTrucateTable(t *testing.T) {
+func TestBackupRestoreIncrementalTruncateTable(t *testing.T) {
 	defer leaktest.AfterTest(t)()
 	defer log.Scope(t).Close(t)
 
@@ -6805,7 +6805,7 @@ func TestPaginatedBackupTenant(t *testing.T) {
 	systemDB.Exec(t, `SET CLUSTER SETTING kv.bulk_sst.target_size='63b'`)
 	systemDB.Exec(t, `SET CLUSTER SETTING kv.bulk_sst.max_allowed_overage='0b'`)
 
-	tenant10.Exec(t, `BACKUP DATABASE foo TO 'userfile://defaultdb.myfililes/test'`)
+	tenant10.Exec(t, `BACKUP DATABASE foo TO 'userfile://defaultdb.myfiles/test'`)
 	require.Equal(t, 1, numExportRequests)
 	startingSpan := roachpb.Span{Key: []byte("/Tenant/10/Table/53/1"), EndKey: []byte("/Tenant/10/Table/53/2")}
 	require.Equal(t, exportRequestSpans, []string{startingSpan.String()})
@@ -6813,7 +6813,7 @@ func TestPaginatedBackupTenant(t *testing.T) {
 
 	// Two ExportRequests with one resume span.
 	systemDB.Exec(t, `SET CLUSTER SETTING kv.bulk_sst.target_size='50b'`)
-	tenant10.Exec(t, `BACKUP DATABASE foo TO 'userfile://defaultdb.myfililes/test2'`)
+	tenant10.Exec(t, `BACKUP DATABASE foo TO 'userfile://defaultdb.myfiles/test2'`)
 	require.Equal(t, 2, numExportRequests)
 	startingSpan = roachpb.Span{Key: []byte("/Tenant/10/Table/53/1"),
 		EndKey: []byte("/Tenant/10/Table/53/2")}
@@ -6824,7 +6824,7 @@ func TestPaginatedBackupTenant(t *testing.T) {
 
 	// One ExportRequest for every KV.
 	systemDB.Exec(t, `SET CLUSTER SETTING kv.bulk_sst.target_size='10b'`)
-	tenant10.Exec(t, `BACKUP DATABASE foo TO 'userfile://defaultdb.myfililes/test3'`)
+	tenant10.Exec(t, `BACKUP DATABASE foo TO 'userfile://defaultdb.myfiles/test3'`)
 	require.Equal(t, 5, numExportRequests)
 	var expected []string
 	for _, resume := range []exportResumePoint{
@@ -6846,10 +6846,10 @@ func TestPaginatedBackupTenant(t *testing.T) {
 	systemDB.Exec(t, `SET CLUSTER SETTING kv.bulk_sst.target_size='10b'`)
 	systemDB.Exec(t, `SET CLUSTER SETTING kv.bulk_sst.max_allowed_overage='10b'`)
 
-	// Allow mid key breaks for the tennant to verify timestamps on resume.
+	// Allow mid key breaks for the tenant to verify timestamps on resume.
 	tenant10.Exec(t, `SET CLUSTER SETTING bulkio.backup.split_keys_on_timestamps = true`)
 	tenant10.Exec(t, `UPDATE baz.bar SET v = 'z' WHERE i = 210`)
-	tenant10.Exec(t, `BACKUP DATABASE baz TO 'userfile://defaultdb.myfililes/test4' with revision_history`)
+	tenant10.Exec(t, `BACKUP DATABASE baz TO 'userfile://defaultdb.myfiles/test4' with revision_history`)
 	expected = nil
 	for _, resume := range []exportResumePoint{
 		{[]byte("/Tenant/10/Table/3"), []byte("/Tenant/10/Table/4"), withoutTS},
@@ -8368,7 +8368,7 @@ func TestBackupOnlyPublicIndexes(t *testing.T) {
 		makeThresholdBlocker(6),
 	}
 
-	// Separately, make a coule of blockers that block all schema change jobs.
+	// Separately, make a couple of blockers that block all schema change jobs.
 	blockBackfills := make(chan struct{})
 	// By default allow backfills to proceed.
 	close(blockBackfills)
@@ -8412,7 +8412,7 @@ func TestBackupOnlyPublicIndexes(t *testing.T) {
 	//  2. Backfill started
 	//  3. Inc 1
 	//  4. Inc 2
-	//  5. Backfill completeed
+	//  5. Backfill completed
 	//  6. Inc 3
 	//  7. Drop index
 	//  8. Inc 4
@@ -8645,7 +8645,7 @@ CREATE DATABASE test; USE test;
 	//   t@3 |             |
 	//   t@4 |     xxxxxxxx|xxxxxxxxx
 	//       ----------------------------------------
-	//             t1    gc_tresh    t2            t3
+	//             t1    gc_thresh    t2            t3
 	//
 	// The span-merging optimization will first look at t3, find only 1 index and
 	// continue It will then look at t1 and see a span-merging opportunity over

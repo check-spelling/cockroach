@@ -61,7 +61,7 @@ import (
 // waiting for the intent resolution to result in a rangefeed publication.
 //
 // It follows that the closed timestamp mechanism is a necessary, but not
-// sufficient, solution to creating a resolved timstamp. The closed timestamp is
+// sufficient, solution to creating a resolved timestamp. The closed timestamp is
 // a necessary basis for the resolved timestamp because without it there could
 // never be any guarantee about new changes to a range. However, the closed
 // timestamp is not sufficient and could not replace the resolved timestamp
@@ -165,7 +165,7 @@ func (rts *resolvedTimestamp) consumeLogicalOp(op enginepb.MVCCLogicalOp) bool {
 		// that none of the transaction's intents will ever be committed.
 		// This means that we can stop tracking the transaction entirely.
 		// Doing so is critical to ensure forward progress of the resolved
-		// timestamp in situtations where the oldest transaction on a range
+		// timestamp in situations where the oldest transaction on a range
 		// is abandoned and the locations of its intents are unknown.
 		//
 		// However, the transaction may also still be writing, updating, and
@@ -505,7 +505,7 @@ func (uiq *unresolvedIntentQueue) Del(txnID uuid.UUID) bool {
 	return wasMin
 }
 
-// AllowNegRefCount instruts the unresolvedIntentQueue on whether or not to
+// AllowNegRefCount instructs the unresolvedIntentQueue on whether or not to
 // allow the reference count on transactions to drop below zero. If disallowed,
 // the method also asserts that all unresolved intent refcounts for transactions
 // currently in the queue are positive. Assertion takes O(n) time, where n is

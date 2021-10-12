@@ -1866,7 +1866,7 @@ type jobsCollection []jobspb.JobID
 // representation of a statement to a maximum length, so as to not
 // create unduly large logging and error payloads.
 func truncateStatementStringForTelemetry(stmt string) string {
-	// panicLogOutputCutoiffChars is the maximum length of the copy of the
+	// panicLogOutputCutoffChars is the maximum length of the copy of the
 	// current statement embedded in telemetry reports and panic errors in
 	// logs.
 	const panicLogOutputCutoffChars = 10000
@@ -2343,7 +2343,7 @@ func generateSessionTraceVTable(spans []tracingpb.RecordedSpan) ([]traceRow, err
 		// The result of FindStringSubmatchIndex is a 1D array of pairs
 		// [start, end) of positions in the input string.  The first pair
 		// identifies the entire match; the 2nd pair corresponds to the
-		// 1st parenthetized expression in the regexp, and so on.
+		// 1st parenthesized expression in the regexp, and so on.
 		loc := logMessageRE.FindStringSubmatchIndex(lrr.msg)
 		if loc == nil {
 			return nil, fmt.Errorf("unable to split trace message: %q", lrr.msg)

@@ -387,7 +387,7 @@ func TestMeta2RangeIter(t *testing.T) {
 	s, _, db := serverutils.StartServer(t, base.TestServerArgs{})
 	defer s.Stopper().Stop(ctx)
 
-	// First make an interator with a large page size and use it to determine the numner of ranges.
+	// First make an iterator with a large page size and use it to determine the number of ranges.
 	iter := makeMeta2RangeIter(db, 10000 /* batchSize */)
 	numRanges := 0
 	for {
@@ -400,7 +400,7 @@ func TestMeta2RangeIter(t *testing.T) {
 	}
 	require.Greater(t, numRanges, 20, "expected over 20 ranges, got: %d", numRanges)
 
-	// Now make an interator with a small page size and check that we get just as many ranges.
+	// Now make an iterator with a small page size and check that we get just as many ranges.
 	iter = makeMeta2RangeIter(db, 2 /* batch size */)
 	numRangesPaginated := 0
 	for {
@@ -433,7 +433,7 @@ func TestRetriableErrorWhenGenerationReport(t *testing.T) {
 	require.Greater(t, len(expReport), 0, "unexpected empty report")
 
 	realIter = makeMeta2RangeIter(db, 10000 /* batchSize */)
-	errorIter := erroryRangeIterator{
+	errorIter := errorRangeIterator{
 		iter:           realIter,
 		injectErrAfter: 3,
 	}
@@ -443,15 +443,15 @@ func TestRetriableErrorWhenGenerationReport(t *testing.T) {
 	require.Equal(t, expReport, v.report)
 }
 
-type erroryRangeIterator struct {
+type errorRangeIterator struct {
 	iter           meta2RangeIter
 	rangesReturned int
 	injectErrAfter int
 }
 
-var _ RangeIterator = &erroryRangeIterator{}
+var _ RangeIterator = &errorRangeIterator{}
 
-func (it *erroryRangeIterator) Next(ctx context.Context) (roachpb.RangeDescriptor, error) {
+func (it *errorRangeIterator) Next(ctx context.Context) (roachpb.RangeDescriptor, error) {
 	if it.rangesReturned == it.injectErrAfter {
 		// Don't inject any more errors.
 		it.injectErrAfter = -1
@@ -470,7 +470,7 @@ func (it *erroryRangeIterator) Next(ctx context.Context) (roachpb.RangeDescripto
 	return rd, err
 }
 
-func (it *erroryRangeIterator) Close(ctx context.Context) {
+func (it *errorRangeIterator) Close(ctx context.Context) {
 	it.iter.Close(ctx)
 }
 

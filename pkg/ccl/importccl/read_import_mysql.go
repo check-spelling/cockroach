@@ -202,7 +202,7 @@ const (
 
 // mysqlValueToDatum attempts to convert a value, as parsed from a mysqldump
 // INSERT statement, in to a Cockroach Datum of type `desired`. The MySQL parser
-// does not parse the values themselves to Go primitivies, rather leaving the
+// does not parse the values themselves to Go primitives, rather leaving the
 // original bytes uninterpreted in a value wrapper. The possible mysql value
 // wrapper types are: StrVal, IntVal, FloatVal, HexNum, HexVal, ValArg, BitVal
 // as well as NullVal.
@@ -611,7 +611,7 @@ func toNameList(cols mysql.Columns) tree.NameList {
 // mysqlColToCockroach attempts to convert a parsed MySQL column definition to a
 // Cockroach column definition, mapping the mysql type to its closest Cockroach
 // counterpart (or returning an error if it is unable to do so).
-// To the extent possible, parameters such as length or precision are preseved
+// To the extent possible, parameters such as length or precision are preserved
 // even if they have only cosmetic (i.e. when viewing schemas) effects compared
 // to their behavior in MySQL.
 func mysqlColToCockroach(

@@ -934,7 +934,7 @@ func TestTxnPipelinerEnableDisableMixTxn(t *testing.T) {
 	require.NotNil(t, br)
 	require.Equal(t, 1, tp.ifWrites.len())
 
-	// Commit the txn. Again with pipeling disabled. Again, in-flight writes
+	// Commit the txn. Again with pipelining disabled. Again, in-flight writes
 	// should be proven first.
 	ba.Requests = nil
 	etArgs := roachpb.EndTxnRequest{Commit: true}
@@ -1766,7 +1766,7 @@ func putBatch(key roachpb.Key, value []byte) roachpb.BatchRequest {
 	return ba
 }
 
-// putBatchNoAsyncConsesnsus returns a PutRequest addressed to the default
+// putBatchNoAsyncConsensus returns a PutRequest addressed to the default
 // replica for the specified key / value. The batch also contains a Get, which
 // inhibits the asyncConsensus flag.
 func putBatchNoAsyncConsensus(key roachpb.Key, value []byte) roachpb.BatchRequest {
@@ -1954,7 +1954,7 @@ func TestTxnPipelinerRejectAboveBudget(t *testing.T) {
 
 					// Make sure that committing works. This is particularly relevant for
 					// testcases where we ended up over budget but we didn't return an
-					// error (because we failed to pre-emptively detect that we're going
+					// error (because we failed to preemptively detect that we're going
 					// to be over budget and the response surprised us with a large
 					// ResumeSpan). Committing in these situations is allowed, since the
 					// harm has already been done.

@@ -465,7 +465,7 @@ func LookupCastVolatility(from, to *types.T, sd *sessiondata.SessionData) (_ Vol
 	if fromFamily == types.TupleFamily && toFamily == types.TupleFamily {
 		fromTypes := from.TupleContents()
 		toTypes := to.TupleContents()
-		// Handle case where an overload makes a tuple get casted to tuple{}.
+		// Handle case where an overload makes a tuple get cast to tuple{}.
 		if len(toTypes) == 1 && toTypes[0].Family() == types.AnyFamily {
 			return VolatilityStable, true
 		}
@@ -991,7 +991,7 @@ func performCastWithoutPrecisionTruncation(ctx *EvalContext, d Datum, t *types.T
 				ctx.SessionData().DataConversionConfig.GetFloatPrec(), 64)
 		case *DInt:
 			if typ.Oid() == oid.T_char {
-				// int to "char" casts just return the correspondong ASCII byte.
+				// int to "char" casts just return the corresponding ASCII byte.
 				if *t > math.MaxInt8 || *t < math.MinInt8 {
 					return nil, errCharOutOfRange
 				} else if *t == 0 {

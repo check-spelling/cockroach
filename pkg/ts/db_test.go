@@ -54,7 +54,7 @@ import (
 // are dispatched to both the ts.DB instance and the test model. Queries are
 // executed against both, and the results should match exactly.
 //
-// In addition, the test model can be used to generate an expecation of the
+// In addition, the test model can be used to generate an expectation of the
 // on-disk layout in the ts.DB instance; the tests should periodically assert
 // that the expectation matches reality.
 //
@@ -237,8 +237,8 @@ func (tm *testModelRunner) storeInModel(r Resolution, data tspb.TimeSeriesData) 
 
 	key := resolutionModelKey(data.Name, r)
 	if tm.DB.WriteColumnar() {
-		firstColumar, ok := tm.firstColumnarTimestamp[key]
-		if candidate := data.Datapoints[0].TimestampNanos; !ok || candidate < firstColumar {
+		firstColumnar, ok := tm.firstColumnarTimestamp[key]
+		if candidate := data.Datapoints[0].TimestampNanos; !ok || candidate < firstColumnar {
 			tm.firstColumnarTimestamp[key] = candidate
 		}
 	}
@@ -289,7 +289,7 @@ func (tm *testModelRunner) storeTimeSeriesData(r Resolution, data []tspb.TimeSer
 		}
 	}
 
-	// store data in the model. Even for rollup resolutoins we store the original
+	// store data in the model. Even for rollup resolutions we store the original
 	// data points in the model, with the expectation that queries will be
 	// identical to those based on rollups.
 	for _, d := range data {

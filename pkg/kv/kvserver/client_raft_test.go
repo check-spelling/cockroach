@@ -4767,7 +4767,7 @@ func TestAckWriteBeforeApplication(t *testing.T) {
 				tc.AddVotersOrFatal(t, key, tc.Target(i))
 			}
 
-			// Begin peforming a write on the Range.
+			// Begin performing a write on the Range.
 			magicTS = tc.Servers[0].Clock().Now()
 			atomic.StoreInt32(&filterActive, 1)
 			ch := make(chan *roachpb.Error, 1)
@@ -5125,7 +5125,7 @@ func TestProcessSplitAfterRightHandSideHasBeenRemoved(t *testing.T) {
 		// Remove and re-add the RHS to create a new uninitialized replica at
 		// a higher replica ID. This will lead to a tombstone being written.
 		tc.RemoveVotersOrFatal(t, keyB, tc.Target(0))
-		// Unsuccessfuly because the RHS will not accept the learner snapshot
+		// Unsuccessfully because the RHS will not accept the learner snapshot
 		// and will be rolled back. Nevertheless it will have learned that it
 		// has been removed at the old replica ID.
 		_, err = tc.Servers[0].DB().AdminChangeReplicas(
@@ -5262,7 +5262,7 @@ func TestProcessSplitAfterRightHandSideHasBeenRemoved(t *testing.T) {
 		// Remove and re-add the RHS to create a new uninitialized replica at
 		// a higher replica ID. This will lead to a tombstone being written.
 		tc.RemoveVotersOrFatal(t, keyB, tc.Target(0))
-		// Unsuccessfuly because the RHS will not accept the learner snapshot
+		// Unsuccessfully because the RHS will not accept the learner snapshot
 		// and will be rolled back. Nevertheless it will have learned that it
 		// has been removed at the old replica ID.
 		//

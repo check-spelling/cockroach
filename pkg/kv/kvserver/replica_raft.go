@@ -90,7 +90,7 @@ func (r *Replica) evalAndPropose(
 	log.Event(proposal.ctx, "evaluated request")
 
 	// If the request hit a server-side concurrency retry error, immediately
-	// proagate the error. Don't assume ownership of the concurrency guard.
+	// propagate the error. Don't assume ownership of the concurrency guard.
 	if isConcurrencyRetryError(pErr) {
 		pErr = maybeAttachLease(pErr, &st.Lease)
 		return nil, nil, "", pErr
@@ -1573,7 +1573,7 @@ func shouldCampaignOnWake(
 	// when all replicas create their raft groups at about the same
 	// time, with a lease pre-assigned to one of them). Note that
 	// thanks to PreVote, unnecessary campaigns are not disruptive so
-	// we should err on the side of campaigining here.
+	// we should err on the side of campaigning here.
 	if leaseStatus.IsValid() && !leaseStatus.OwnedBy(storeID) {
 		return false
 	}
@@ -1707,7 +1707,7 @@ func (r *Replica) maybeAcquireSnapshotMergeLock(
 	// command after the merge commits.
 	endKey := r.Desc().EndKey
 	if endKey == nil {
-		// The existing replica is unitialized, in which case we've already
+		// The existing replica is uninitialized, in which case we've already
 		// installed a placeholder for snapshot's keyspace. No merge lock needed.
 		return nil, func() {}
 	}

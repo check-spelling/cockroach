@@ -46,7 +46,7 @@ const encryptionVersionIVPrefix = 1
 // v2 is an IV followed by 1 or more sealed GCM messages representing chunks of
 // the original input. The last chunk is always less than full size (and may be
 // empty) prior to being sealed, which is verified by the reader to
-// authticate against truncation at a chunk boundary.
+// authenticate against truncation at a chunk boundary.
 const encryptionVersionChunk = 2
 
 // encryptionChunkSizeV2 is the chunk-size used by v2, i.e. 64kb, which should
@@ -162,7 +162,7 @@ func (e *encWriter) Close() error {
 	// Note: there may not be any plaintext left to seal if the chunk we just
 	// finished was the end of it, but sealing the (empty) remainder in a final
 	// chunk maintains the invariant that a chunked file always ends in a sealed
-	// chunk of less than chunk size, thus making tuncation, even along a chunk
+	// chunk of less than chunk size, thus making truncation, even along a chunk
 	// boundary, detectable.
 	err := e.flush()
 	return errors.CombineErrors(err, e.ciphertext.Close())

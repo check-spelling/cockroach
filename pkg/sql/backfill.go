@@ -160,7 +160,7 @@ type InternalExecFn func(ctx context.Context, txn *kv.Txn, ie *InternalExecutor)
 
 // HistoricalInternalExecTxnRunner is like historicalTxnRunner except it only
 // passes the fn the exported InternalExecutor instead of the whole unexported
-// extendedEvalContenxt, so it can be implemented outside pkg/sql.
+// extendedEvalContext, so it can be implemented outside pkg/sql.
 type HistoricalInternalExecTxnRunner func(ctx context.Context, fn InternalExecFn) error
 
 // makeFixedTimestampRunner creates a HistoricalTxnRunner suitable for use by the helpers.
@@ -1557,7 +1557,7 @@ func ValidateInvertedIndexes(
 
 	for i, idx := range indexes {
 		// Shadow i and idx to prevent the values from changing within each
-		// gorountine.
+		// goroutine.
 		i, idx := i, idx
 		countReady[i] = make(chan struct{})
 
@@ -1719,7 +1719,7 @@ func ValidateForwardIndexes(
 
 	// Compute the size of each index.
 	for _, idx := range indexes {
-		// Shadow idx to prevent its value from changing within each gorountine.
+		// Shadow idx to prevent its value from changing within each goroutine.
 		idx := idx
 
 		grp.GoCtx(func(ctx context.Context) error {

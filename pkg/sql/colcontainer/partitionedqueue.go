@@ -126,7 +126,7 @@ var _ PartitionedQueue = &PartitionedDiskQueue{}
 
 // NewPartitionedDiskQueue creates a PartitionedDiskQueue whose partitions are
 // all on-disk queues. Note that diskQueues will be lazily created when
-// enqueueing to a new partition. Each new partition will use
+// enqueuing to a new partition. Each new partition will use
 // cfg.BufferSizeBytes, so memory usage may increase in an unbounded fashion if
 // used unmethodically. The file descriptors are acquired through fdSemaphore.
 // If fdSemaphore is nil, the partitioned disk queue will not Acquire or Release
@@ -239,7 +239,7 @@ func (p *PartitionedDiskQueue) Enqueue(
 
 		if needToAcquireFD {
 			// Acquire only one file descriptor. This will represent the write file
-			// descriptor. When we start Dequeueing from this partition, this will
+			// descriptor. When we start Dequeuing from this partition, this will
 			// represent the read file descriptor.
 			if err := p.acquireNewFD(ctx); err != nil {
 				return err

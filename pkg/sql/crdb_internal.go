@@ -151,7 +151,7 @@ var crdbInternal = virtualSchema{
 		catconstants.CrdbInternalInvalidDescriptorsTableID:        crdbInternalInvalidDescriptorsTable,
 		catconstants.CrdbInternalClusterDatabasePrivilegesTableID: crdbInternalClusterDatabasePrivilegesTable,
 		catconstants.CrdbInternalInterleaved:                      crdbInternalInterleaved,
-		catconstants.CrdbInternalCrossDbRefrences:                 crdbInternalCrossDbReferences,
+		catconstants.CrdbInternalCrossDbReferences:                 crdbInternalCrossDbReferences,
 		catconstants.CrdbInternalLostTableDescriptors:             crdbLostTableDescriptors,
 		catconstants.CrdbInternalClusterInflightTracesTable:       crdbInternalClusterInflightTracesTable,
 		catconstants.CrdbInternalRegionsTable:                     crdbInternalRegionsTable,
@@ -1470,7 +1470,7 @@ CREATE TABLE crdb_internal.%s (
   node_id INT,             -- the ID of the node running the transaction
   session_id STRING,       -- the ID of the session
   start TIMESTAMP,         -- the start time of the transaction
-  txn_string STRING,       -- the string representation of the transcation
+  txn_string STRING,       -- the string representation of the transaction
   application_name STRING, -- the name of the application as per SET application_name
   num_stmts INT,           -- the number of statements executed so far
   num_retries INT,         -- the number of times the transaction was restarted

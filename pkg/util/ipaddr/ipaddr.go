@@ -179,7 +179,7 @@ func ParseINet(s string, dest *IPAddr) error {
 
 	// If no mask suffix was provided, implicitly don't mask.
 	if i < 0 {
-		// Trims IPv4 suffix "." to match postgres compitibility.
+		// Trims IPv4 suffix "." to match postgres compatibility.
 		addr := s
 		if family == IPv4family {
 			addr = strings.TrimRight(addr, ".")
@@ -202,7 +202,7 @@ func ParseINet(s string, dest *IPAddr) error {
 	}
 
 	addr, maskStr := s[:i], s[i+1:]
-	// Trims IPv4 suffix "." to match postgres compitibility.
+	// Trims IPv4 suffix "." to match postgres compatibility.
 	if family == IPv4family {
 		addr = strings.TrimRight(addr, ".")
 	}
@@ -528,12 +528,12 @@ func (ip Addr) WriteIPv6Bytes(writer io.Writer) error {
 	return binary.Write(writer, binary.BigEndian, ip.Lo)
 }
 
-// Equal wraps the Uint128 equivilance.
+// Equal wraps the Uint128 equivalence.
 func (ip Addr) Equal(o Addr) bool {
 	return uint128.Uint128(ip).Equal(uint128.Uint128(o))
 }
 
-// Compare wraps the Uint128 equivilance.
+// Compare wraps the Uint128 equivalence.
 func (ip Addr) Compare(o Addr) int {
 	return uint128.Uint128(ip).Compare(uint128.Uint128(o))
 }

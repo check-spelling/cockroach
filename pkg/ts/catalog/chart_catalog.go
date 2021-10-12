@@ -303,7 +303,7 @@ var charts = []sectionDescription{
 					"distsender.rpc.heartbeattxn.sent",
 					"distsender.rpc.import.sent",
 					"distsender.rpc.increment.sent",
-					"distsender.rpc.initput.sent",
+					"distsender.rpc.InitPut.sent",
 					"distsender.rpc.leaseinfo.sent",
 					"distsender.rpc.merge.sent",
 					"distsender.rpc.migrate.sent",
@@ -670,7 +670,7 @@ var charts = []sectionDescription{
 				Metrics: []string{"queue.gc.info.intenttxns"},
 			},
 			{
-				Title:   "Enteries in Txn Spans",
+				Title:   "Entries in Txn Spans",
 				Metrics: []string{"queue.gc.info.transactionspanscanned"},
 			},
 			{
@@ -850,11 +850,11 @@ var charts = []sectionDescription{
 				},
 			},
 			{
-				Title:   "Cumultative Age of Non-Live Data",
+				Title:   "Cumulative Age of Non-Live Data",
 				Metrics: []string{"gcbytesage"},
 			},
 			{
-				Title:   "Cumultative Intent Age",
+				Title:   "Cumulative Intent Age",
 				Metrics: []string{"intentage"},
 			},
 			{
@@ -1210,7 +1210,7 @@ var charts = []sectionDescription{
 				Metrics: []string{"requests.slow.lease"},
 			},
 			{
-				Title: "Succcess Rate",
+				Title: "Success Rate",
 				Metrics: []string{
 					"leases.error",
 					"leases.success",
@@ -1484,7 +1484,7 @@ var charts = []sectionDescription{
 		Organization: [][]string{{ReplicationLayer, "Ranges"}},
 		Charts: []chartDescription{
 			{
-				Title:   "Backpressued Writes Waiting on Split",
+				Title:   "Backpressured Writes Waiting on Split",
 				Metrics: []string{"requests.backpressure.split"},
 			},
 			{
@@ -2437,11 +2437,11 @@ var charts = []sectionDescription{
 				},
 			},
 			{
-				Title:   "Cumultative Age of Non-Live Data",
+				Title:   "Cumulative Age of Non-Live Data",
 				Metrics: []string{"gcbytesage"},
 			},
 			{
-				Title:   "Cumultative Intent Age",
+				Title:   "Cumulative Intent Age",
 				Metrics: []string{"intentage"},
 			},
 			{

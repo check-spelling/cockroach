@@ -183,7 +183,7 @@ func checkRestarts(t *testing.T, magicVals *filterVals) {
 // The TxnAborter needs to be hooked up to a Server's
 // Knobs.StatementFilter, so that the Aborter sees what statements are being
 // executed. This is done by calling HookupToExecutor(), which returns a
-// stuitable ExecutorTestingKnobs.
+// suitable ExecutorTestingKnobs.
 // A statement can be registered for abortion (meaning, the statement's
 // transaction will be TransactionAborted) with QueueStmtForAbortion(). When the
 // Aborter sees that statement, it will run a higher priority transaction that
@@ -244,7 +244,7 @@ type TxnAborter struct {
 }
 
 type restartInfo struct {
-	// The numberic value being inserted in col 'k'.
+	// The numeric value being inserted in col 'k'.
 	key int
 	// The remaining number of times to abort the txn.
 	abortCount     int
@@ -1219,7 +1219,7 @@ SELECT * from t.test WHERE k = 'test_key';
 	}
 
 	if u := atomic.LoadInt32(&clockUpdate); u != 1 {
-		t.Errorf("expected exacltly one clock update, but got %d", u)
+		t.Errorf("expected exactly one clock update, but got %d", u)
 	}
 	if u, e := atomic.LoadInt32(&restartDone), int32(refreshAttempts+1); u != e {
 		t.Errorf("expected exactly %d restarts, but got %d", e, u)
@@ -1230,7 +1230,7 @@ SELECT * from t.test WHERE k = 'test_key';
 //
 // This test triggers the above scenario by triggering a restart by returning
 // ReadWithinUncertaintyIntervalError on the first transaction attempt.
-func TestFlushUncommitedDescriptorCacheOnRestart(t *testing.T) {
+func TestFlushUncommittedDescriptorCacheOnRestart(t *testing.T) {
 	defer leaktest.AfterTest(t)()
 	defer log.Scope(t).Close(t)
 

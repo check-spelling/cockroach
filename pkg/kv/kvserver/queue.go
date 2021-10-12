@@ -928,7 +928,7 @@ func (bq *baseQueue) processReplica(ctx context.Context, repl replicaInQueue) er
 				// We checked this when adding the replica, but we need to check it again
 				// in case this is a different replica with the same range ID (see #14193).
 				// This is possible in the case where the replica was enqueued while not
-				// having a replica ID, perhaps due to a pre-emptive snapshot, and has
+				// having a replica ID, perhaps due to a preemptive snapshot, and has
 				// since been removed and re-added at a different replica ID.
 				return errors.New("cannot process uninitialized replica")
 			}
@@ -1254,7 +1254,7 @@ func (bq *baseQueue) addLocked(item *replicaItem) {
 // error) or from the priority queue by index. Caller must hold mutex.
 func (bq *baseQueue) removeLocked(item *replicaItem) {
 	if item.processing {
-		// The item is processing. We can't intererupt the processing
+		// The item is processing. We can't interrupt the processing
 		// or remove it from the replica set yet, but we can make sure
 		// it doesn't get requeued.
 		item.requeue = false

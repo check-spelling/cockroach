@@ -103,7 +103,7 @@ Wraps: (2) attached stack trace
 Wraps: (3) some error
 Error types: (1) *safedetails.withSafeDetails (2) *withstack.withStack (3) *errutil.leafError`
 
-	// Edit non-determinstic stack trace filenames from the message.
+	// Edit non-deterministic stack trace filenames from the message.
 	actSafeRedactedMessage := fileref.ReplaceAllString(
 		redact.Sprintf("%+v", safeErr).Redact().StripMarkers(), "...$2:NN")
 
@@ -1068,7 +1068,7 @@ func TestTransactionDeadline(t *testing.T) {
 	// reset the session override hook.
 	setClientSessionOverride := func(fs sqlliveness.Session) (reset func()) {
 		sessionOverride.Store(func(ctx context.Context) (sqlliveness.Session, error) {
-			// This somewhat hacky approach allows the hook to itentify contexts
+			// This somewhat hacky approach allows the hook to identify contexts
 			// due to client connections. Client connections carry logtags which
 			// look like: [sql,client=127.0.0.1:63305,hostssl,user=root].
 			if tags := logtags.FromContext(ctx); tags == nil ||

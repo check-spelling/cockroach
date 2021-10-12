@@ -2037,7 +2037,7 @@ func TestAllocatorRebalanceDifferentLocalitySizes(t *testing.T) {
 	// up being fuller than the nodes in the large locality. In the past this has
 	// caused an over-eagerness to rebalance to nodes in the large locality, and
 	// not enough willingness to rebalance within the small localities. This test
-	// verifies that we compare fairly amongst stores that will givve the store
+	// verifies that we compare fairly amongst stores that will give the store
 	// an optimal diversity score, not considering the fullness of those that
 	// will make for worse diversity.
 	stores := []*roachpb.StoreDescriptor{
@@ -2203,7 +2203,7 @@ func TestAllocatorRebalanceDifferentLocalitySizes(t *testing.T) {
 		{replicas(1, 3, 10), []roachpb.StoreID{5, 6, 7, 8}},
 		// This last case is a bit more interesting - the difference in range count
 		// between s10 an s9 is significant enough to motivate a rebalance if they
-		// were the only two valid options, but they're both considered underful
+		// were the only two valid options, but they're both considered underfull
 		// relative to the other equally valid placement options (s3 and s4), so
 		// the system doesn't consider it helpful to rebalance between them. It'd
 		// prefer to move replicas onto both s9 and s10 from other stores.
@@ -6556,7 +6556,7 @@ func TestAllocatorComputeActionDynamicNumReplicas(t *testing.T) {
 		{
 			// Effective replication factor can't dip below three (unless the
 			// span config explicitly asks for that, which it does not), so three
-			// it is and we are under-replicaed.
+			// it is and we are under-replicated.
 			storeList:           []roachpb.StoreID{1, 2},
 			expectedNumReplicas: 3,
 			expectedAction:      AllocatorAddVoter,

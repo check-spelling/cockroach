@@ -2042,7 +2042,7 @@ func TestStoreRangeMergeRHSLeaseTransfers(t *testing.T) {
 	//
 	// In the past, this lease transfer would get blocked on the mergeComplete
 	// channel. While in this state, it would block the lease acquisition
-	// triggerred by the Subsume request because a replica only performs a
+	// triggered by the Subsume request because a replica only performs a
 	// single lease operation at a time. As a result, this would deadlock and
 	// neither the lease transfer nor the merge would ever complete.
 	err = tc.TransferRangeLease(rhsDesc, tc.Target(1))
@@ -3029,7 +3029,7 @@ func TestStoreRangeMergeAbandonedFollowersAutomaticallyGarbageCollected(t *testi
 		},
 	})
 
-	// Perform the merge. The LHS replica on store2 whon't hear about this merge
+	// Perform the merge. The LHS replica on store2 won't hear about this merge
 	// and thus won't subsume its RHS replica. The RHS replica's merge watcher
 	// goroutine will, however, notice the merge and mark the RHS replica as
 	// destroyed with reason destroyReasonMergePending.

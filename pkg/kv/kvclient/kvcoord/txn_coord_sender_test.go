@@ -1254,7 +1254,7 @@ func TestTxnCommitWait(t *testing.T) {
 		// gateway they use. This ensures that all causally dependent
 		// transactions commit with higher timestamps, even if their read and
 		// writes sets do not conflict with the original transaction's. This, in
-		// turn, prevents the "causal reverse" anamoly which can be observed by
+		// turn, prevents the "causal reverse" anomaly which can be observed by
 		// a third, concurrent transaction. See the following blog post for
 		// more: https://www.cockroachlabs.com/blog/consistency-model/.
 		maxClockOffset := s.Clock.MaxOffset()
@@ -2446,7 +2446,7 @@ func TestLeafTxnClientRejectError(t *testing.T) {
 // Check that ingesting an Aborted txn record is a no-op. The TxnCoordSender is
 // supposed to reject such updates because they risk putting it into an
 // inconsistent state. See comments in TxnCoordSender.UpdateRootWithLeafFinalState().
-func TestUpdateRoootWithLeafFinalStateInAbortedTxn(t *testing.T) {
+func TestUpdateRootWithLeafFinalStateInAbortedTxn(t *testing.T) {
 	defer leaktest.AfterTest(t)()
 	defer log.Scope(t).Close(t)
 	s := createTestDBWithKnobs(t, nil /* knobs */)

@@ -201,7 +201,7 @@ type JSON interface {
 
 	// preprocessForContains converts a JSON document to an internal interface
 	// which is used to efficiently implement the @> operator.
-	preprocessForContains() (containsable, error)
+	preprocessForContains() (containable, error)
 
 	// encode appends the encoding of the JSON document to appendTo, returning
 	// the result alongside the JEntry for the document. Note that some values
@@ -389,10 +389,10 @@ func (b *ObjectBuilder) Build() JSON {
 	return jsonObject(sorter.pairs)
 }
 
-// pairSorter sorts and uniqueifies JSON pairs. In order to keep
+// pairSorter sorts and uniquifies JSON pairs. In order to keep
 // the last one for pairs with the same key while sort.Sort is
 // not stable, pairSorter uses []int orders to maintain order and
-// bool hasNonUnique to skip unnecessary uniqueifying.
+// bool hasNonUnique to skip unnecessary uniquifying.
 type pairSorter struct {
 	pairs        []jsonKeyValuePair
 	orders       []int

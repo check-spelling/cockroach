@@ -2349,7 +2349,7 @@ func recordRangeEventsInLog(
 // returns true, this is communicated back to the sender, which then proceeds to
 // call `kvBatchSnapshotStrategy.Send`. This uses the iterator captured earlier
 // to send the data in chunks, each chunk a streaming grpc message. The sender
-// then sends a final message with an indicaton that it's done and blocks again,
+// then sends a final message with an indication that it's done and blocks again,
 // waiting for a second and final response from the recipient which indicates if
 // the snapshot was a success.
 //
@@ -2490,7 +2490,7 @@ func (r *Replica) sendSnapshot(
 		},
 		RangeSize: r.GetMVCCStats().Total(),
 		// Recipients currently cannot choose to decline any snapshots.
-		// In 19.2 and earlier versions pre-emptive snapshots could be declined.
+		// In 19.2 and earlier versions preemptive snapshots could be declined.
 		//
 		// TODO(ajwerner): Consider removing the CanDecline flag.
 		CanDecline: false,

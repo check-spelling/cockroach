@@ -131,7 +131,7 @@ function would_stress() {
 }
 
 function maybe_stress() {
-   # NB: This code doesn't know about posting Github issues as we don't stress on
+   # NB: This code doesn't know about posting GitHub issues as we don't stress on
    # the release branches.
   if ! would_stress; then
     return 0
@@ -159,7 +159,7 @@ get_release_branches() {
     | sort -t- -k2 -n -r -s
 }
 
-# Returns the number of commits in the curent branch that are not shared with
+# Returns the number of commits in the current branch that are not shared with
 # the given branch.
 get_branch_distance() {
   git rev-list --count $1..HEAD

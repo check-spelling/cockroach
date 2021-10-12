@@ -1121,9 +1121,9 @@ func TestPartitionSpansSkipsIncompatibleNodes(t *testing.T) {
 }
 
 // Test that a node whose descriptor info is not accessible through gossip is
-// not used. This is to simulate nodes that have been decomisioned and also
+// not used. This is to simulate nodes that have been decommissioned and also
 // nodes that have been "replaced" by another node at the same address (which, I
-// guess, is also a type of decomissioning).
+// guess, is also a type of decommissioning).
 func TestPartitionSpansSkipsNodesNotInGossip(t *testing.T) {
 	defer leaktest.AfterTest(t)()
 	defer log.Scope(t).Close(t)
@@ -1460,8 +1460,8 @@ func TestCheckScanParallelizationIfLocal(t *testing.T) {
 			prohibitParallelization: true,
 		},
 	} {
-		prohibitParallelization, hasScanNodeToParallize := checkScanParallelizationIfLocal(context.Background(), &tc.plan)
+		prohibitParallelization, hasScanNodeToParallelize := checkScanParallelizationIfLocal(context.Background(), &tc.plan)
 		require.Equal(t, tc.prohibitParallelization, prohibitParallelization)
-		require.Equal(t, tc.hasScanNodeToParallelize, hasScanNodeToParallize)
+		require.Equal(t, tc.hasScanNodeToParallelize, hasScanNodeToParallelize)
 	}
 }

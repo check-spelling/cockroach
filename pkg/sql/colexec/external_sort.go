@@ -142,7 +142,7 @@ type externalSorter struct {
 	// partitionerToOperators stores all partitionerToOperator instances that we
 	// have created when merging partitions. This allows for reusing them in
 	// case we need to perform repeated merging (namely, we'll be able to reuse
-	// their internal batches from dequeueing from disk).
+	// their internal batches from dequeuing from disk).
 	partitionerToOperators []*partitionerToOperator
 	// numPartitions is the current number of partitions.
 	numPartitions int
@@ -397,7 +397,7 @@ func (s *externalSorter) Next() coldata.Batch {
 			// *not* release that memory from the allocator, so we have to do it
 			// ourselves.
 			//
-			// Note that the memory used for dequeueing batches from the
+			// Note that the memory used for dequeuing batches from the
 			// partitions is retained and is registered with the merge unlimited
 			// allocator.
 			n := 2
@@ -492,7 +492,7 @@ func (s *externalSorter) Next() coldata.Batch {
 // batch is enqueued and true is returned indicating that the current partition
 // is done.
 //
-// The following observation is what allows us to stop enqueueing into the
+// The following observation is what allows us to stop enqueuing into the
 // current partition once topK number of tuples is reached: `b` is not coming
 // from the input to the sort operation as a whole (when tuples can be in an
 // arbitrary order) - `b` is coming to us either from the in-memory top K sorter
@@ -598,7 +598,7 @@ func (s *externalSorter) Reset(ctx context.Context) {
 	s.numPartitions = 0
 	// Note that we consciously do not reset maxNumberPartitions and
 	// maxNumberPartitionsDynamicallyReduced (when the latter is true) since we
-	// are keeping the memory used for dequeueing batches.
+	// are keeping the memory used for dequeuing batches.
 	s.emitted = 0
 }
 

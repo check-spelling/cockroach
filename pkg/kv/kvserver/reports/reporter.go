@@ -291,7 +291,7 @@ type zoneResolver struct {
 	init bool
 	// curObjectID is the object (i.e. usually table) of the configured range.
 	curObjectID config.SystemTenantObjectID
-	// curRootZone is the lowest zone convering the previously resolved range
+	// curRootZone is the lowest zone covering the previously resolved range
 	// that's not a subzone.
 	// This is used to compute the subzone for a range.
 	curRootZone *zonepb.ZoneConfig
@@ -451,7 +451,7 @@ func visitAncestors(
 	}
 
 	// TODO(ajwerner): Reconsider how this zone config picking apart happens. This
-	// isn't how we want to be retreiving table descriptors in general.
+	// isn't how we want to be retrieving table descriptors in general.
 	var desc descpb.Descriptor
 	if err := descVal.GetProto(&desc); err != nil {
 		return false, err
@@ -525,7 +525,7 @@ type rangeVisitor interface {
 	// As soon as the range is not covered by it, visitNewZone() is called again.
 	// The idea is that visitors can maintain state about that zone that applies
 	// to multiple ranges, and so visitSameZone() allows them to efficiently reuse
-	// that state (in particular, not unmarshall ZoneConfigs again).
+	// that state (in particular, not unmarshal ZoneConfigs again).
 	visitNewZone(context.Context, *roachpb.RangeDescriptor) error
 	visitSameZone(context.Context, *roachpb.RangeDescriptor)
 
@@ -806,7 +806,7 @@ func getReportGenerationTime(
 
 	if len(row) != 1 {
 		return time.Time{}, errors.AssertionFailedf(
-			"expected 1 column from intenal query, got: %d", len(row))
+			"expected 1 column from internal query, got: %d", len(row))
 	}
 	generated, ok := row[0].(*tree.DTimestampTZ)
 	if !ok {

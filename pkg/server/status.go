@@ -948,7 +948,7 @@ func (s *statusServer) GetFiles(
 	var dir string
 	switch req.Type {
 	//TODO(ridwanmsharif): Serve logfiles so debug-zip can fetch them
-	// intead of reading indididual entries.
+	// instead of reading individual entries.
 	case serverpb.FileType_HEAP: // Requesting for saved Heap Profiles.
 		dir = s.admin.server.cfg.HeapProfileDirName
 	case serverpb.FileType_GOROUTINES: // Requesting for saved Goroutine dumps.
@@ -989,7 +989,7 @@ func (s *statusServer) GetFiles(
 // Only patterns to match filenames are acceptable, not more general paths.
 func checkFilePattern(pattern string) error {
 	if strings.Contains(pattern, string(os.PathSeparator)) {
-		return errors.New("invalid pattern: cannot have path seperators")
+		return errors.New("invalid pattern: cannot have path separators")
 	}
 	return nil
 }

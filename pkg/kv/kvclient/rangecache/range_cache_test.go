@@ -385,7 +385,7 @@ func TestRangeCacheAssumptions(t *testing.T) {
 // TestRangeCache is a simple test which verifies that metadata ranges
 // are being cached and retrieved properly. It sets up a fake backing
 // store for the cache, and measures how often that backing store is
-// lookuped when looking up metadata keys through the cache.
+// lookedup when looking up metadata keys through the cache.
 func TestRangeCache(t *testing.T) {
 	defer leaktest.AfterTest(t)()
 	defer log.Scope(t).Close(t)
@@ -1536,7 +1536,7 @@ func TestRangeCacheEvictAndReplace(t *testing.T) {
 	require.Equal(t, roachpb.LeaseSequence(1), tok.LeaseSeq())
 	require.Equal(t, roachpb.LEAD_FOR_GLOBAL_READS, tok.ClosedTimestampPolicy())
 
-	// EvictAndReplace() with a speculative descriptor. Should update decriptor,
+	// EvictAndReplace() with a speculative descriptor. Should update descriptor,
 	// remove lease, and retain closed timestamp policy.
 	tok.speculativeDesc = &desc3
 	tok.EvictAndReplace(ctx)

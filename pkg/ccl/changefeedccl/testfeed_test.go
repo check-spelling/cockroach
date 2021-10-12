@@ -377,11 +377,11 @@ func (f *jobFeed) Close() error {
 	return nil
 }
 
-// sinkSychronizer allows testfeed's Next() method to synchronize itself
+// sinkSynchronizer allows testfeed's Next() method to synchronize itself
 // with the sink operations.
 type sinkSynchronizer struct {
 	syncutil.Mutex
-	waitor  chan struct{}
+	waiter  chan struct{}
 	flushed bool
 }
 
@@ -396,7 +396,7 @@ func (s *sinkSynchronizer) eventReady() chan struct{} {
 		close(ready)
 		s.flushed = false
 	} else {
-		s.waitor = ready
+		s.waiter = ready
 	}
 
 	return ready
@@ -406,9 +406,9 @@ func (s *sinkSynchronizer) addFlush() {
 	s.Lock()
 	defer s.Unlock()
 	s.flushed = true
-	if s.waitor != nil {
-		close(s.waitor)
-		s.waitor = nil
+	if s.waiter != nil {
+		close(s.waiter)
+		s.waiter = nil
 		s.flushed = false
 	}
 }

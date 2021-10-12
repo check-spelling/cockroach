@@ -1684,7 +1684,7 @@ SELECT ST_S2Covering(geography, 's2_max_level=15,s2_level_mod=3').
 			},
 			types.String,
 			infoBuilder{
-				info: "Returns a GeoHash representation of the geeographywith full precision if a point is provided, or with variable precision based on the size of the feature.",
+				info: "Returns a GeoHash representation of the geography with full precision if a point is provided, or with variable precision based on the size of the feature.",
 			},
 			tree.VolatilityImmutable,
 		),
@@ -3123,7 +3123,7 @@ Note If the result has zero or one points, it will be returned as a POINT. If it
 			types.Geometry,
 			infoBuilder{
 				info: `Returns the "simplest" representation of a collection's contents. Collections of a single ` +
-					`type will be returned as an appopriate multitype, or a singleton if it only contains a ` +
+					`type will be returned as an appropriate multitype, or a singleton if it only contains a ` +
 					`single geometry.`,
 			},
 			tree.VolatilityImmutable,
@@ -6754,7 +6754,7 @@ May return a Point or LineString in the case of degenerate inputs.`,
 				return tree.NewDInt(tree.DInt(ret)), nil
 			},
 			Info: infoBuilder{
-				info: `Returns an interger value defining behavior of crossing of lines: 
+				info: `Returns an integer value defining behavior of crossing of lines: 
 0: lines do not cross,
 -1: linestring_b crosses linestring_a from right to left,
 1: linestring_b crosses linestring_a from left to right,
@@ -6974,7 +6974,7 @@ func geographyOverload1WithUseSpheroid(
 	}
 }
 
-// geographyOverload2 hides the boilerplate for builtins operating on two geographys.
+// geographyOverload2 hides the boilerplate for builtins operating on two geographies.
 func geographyOverload2(
 	f func(*tree.EvalContext, *tree.DGeography, *tree.DGeography) (tree.Datum, error),
 	returnType *types.T,
@@ -6997,7 +6997,7 @@ func geographyOverload2(
 	}
 }
 
-// geographyOverload2 hides the boilerplate for builtins operating on two geographys
+// geographyOverload2 hides the boilerplate for builtins operating on two geographies
 // and the overlap wraps a binary predicate.
 func geographyOverload2BinaryPredicate(
 	f func(geo.Geography, geo.Geography) (bool, error), ib infoBuilder,
@@ -7219,7 +7219,7 @@ func appendStrArgOverloadForGeometryArgOverloads(def builtinDefinition) builtinD
 	copy(newOverloads, def.overloads)
 
 	for i := range def.overloads {
-		// Define independntly as it is used by a closure below.
+		// Define independently as it is used by a closure below.
 		ov := def.overloads[i]
 
 		argTypes, ok := ov.Types.(tree.ArgTypes)

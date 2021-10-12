@@ -123,7 +123,7 @@ func testRangeDescriptor() *roachpb.RangeDescriptor {
 	}
 }
 
-// boostrapMode controls how the first range is created in testContext.
+// bootstrapMode controls how the first range is created in testContext.
 type bootstrapMode int
 
 const (
@@ -676,7 +676,7 @@ func TestReplicaReadConsistency(t *testing.T) {
 		t.Errorf("expected success on consistent read: %+v", err)
 	}
 
-	// Try a read commmitted read and an inconsistent read, both within a
+	// Try a read committed read and an inconsistent read, both within a
 	// transaction.
 	txn := newTransaction("test", roachpb.Key("a"), 1, tc.Clock())
 	assignSeqNumsForReqs(txn, &gArgs)
@@ -3651,7 +3651,7 @@ func TestReplicaTxnIdempotency(t *testing.T) {
 			},
 		},
 		{
-			name: "reissued initput",
+			name: "reissued InitPut",
 			afterTxnStart: func(txn *roachpb.Transaction, key []byte) error {
 				args := iPutArgs(key, val1)
 				args.Sequence = 2
@@ -5686,7 +5686,7 @@ func TestPushTxnUpgradeExistingTxn(t *testing.T) {
 	}
 }
 
-// TestPushTxnQueryPusheerHasNewerVersion verifies that PushTxn
+// TestPushTxnQueryPusheeHasNewerVersion verifies that PushTxn
 // uses the newer version of the pushee in a push request.
 func TestPushTxnQueryPusheeHasNewerVersion(t *testing.T) {
 	defer leaktest.AfterTest(t)()
@@ -7859,7 +7859,7 @@ func TestDiffRange(t *testing.T) {
 		}
 	}
 
-	// Document the stringifed output. This is what the consistency checker
+	// Document the stringified output. This is what the consistency checker
 	// will actually print.
 	stringDiff := append(eDiff[:4],
 		ReplicaSnapshotDiff{Key: []byte("foo"), Value: value},
@@ -8200,7 +8200,7 @@ func TestReplicaRefreshPendingCommandsTicks(t *testing.T) {
 	r := tc.repl
 	electionTicks := tc.store.cfg.RaftElectionTimeoutTicks
 	{
-		// The verifications of the reproposal counts below rely on r.mu.ticks
+		// The verification of the reproposal counts below rely on r.mu.ticks
 		// starting with a value of 0 (modulo electionTicks). Move the replica into
 		// that state in case the replica was ticked before we grabbed
 		// processRaftMu.
@@ -8614,7 +8614,7 @@ func TestFailureToProcessCommandClearsLocalResult(t *testing.T) {
 	r := tc.repl
 	r.mu.Lock()
 	r.mu.proposalBuf.testing.leaseIndexFilter = func(p *ProposalData) (indexOverride uint64) {
-		// We're going to recognize the first time the commnand for the EndTxn is
+		// We're going to recognize the first time the command for the EndTxn is
 		// proposed and we're going to hackily force a low MaxLeaseIndex, so that
 		// the processing gets rejected further on.
 		ut := p.Local.UpdatedTxns
@@ -10239,7 +10239,7 @@ func TestReplicaRecomputeStats(t *testing.T) {
 
 // TestConsistencyQueueErrorFromCheckConsistency exercises the case in which
 // the queue receives an error from CheckConsistency.
-func TestConsistenctQueueErrorFromCheckConsistency(t *testing.T) {
+func TestConsistencyQueueErrorFromCheckConsistency(t *testing.T) {
 	defer leaktest.AfterTest(t)()
 	defer log.Scope(t).Close(t)
 
@@ -10367,7 +10367,7 @@ func TestReplicaServersideRefreshes(t *testing.T) {
 			},
 		},
 		{
-			name: "serverside-refresh of write too old on initput",
+			name: "serverside-refresh of write too old on InitPut",
 			setupFn: func() (hlc.Timestamp, error) {
 				// Note there are two different version of the value, but a
 				// non-txnal cput will evaluate the most recent version and
@@ -10432,9 +10432,9 @@ func TestReplicaServersideRefreshes(t *testing.T) {
 			},
 			expErr: "write at timestamp .* too old",
 		},
-		// Non-1PC serializable txn initput will fail with write too old error.
+		// Non-1PC serializable txn InitPut will fail with write too old error.
 		{
-			name: "no serverside-refresh of write too old on non-1PC txn initput",
+			name: "no serverside-refresh of write too old on non-1PC txn InitPut",
 			setupFn: func() (hlc.Timestamp, error) {
 				return put("c-iput", "put")
 			},
@@ -10486,7 +10486,7 @@ func TestReplicaServersideRefreshes(t *testing.T) {
 		// current behavior; for example since there's nothing to refresh, the
 		// request could be retried.
 		{
-			name: "serverside-refresh of write too old on non-1PC txn initput without prior reads",
+			name: "serverside-refresh of write too old on non-1PC txn InitPut without prior reads",
 			setupFn: func() (hlc.Timestamp, error) {
 				// Note there are two different version of the value, but a
 				// non-txnal cput will evaluate the most recent version and
@@ -12711,7 +12711,7 @@ func TestSplitSnapshotWarningStr(t *testing.T) {
 // transfer or change to the gc threshold). This test works to exercise the
 // invariant that when a proposal has been reproposed at different MaxLeaseIndex
 // values are not additionally reproposed or acknowledged after applying
-// locally. The test verfies this condition by asserting that the
+// locally. The test verifies this condition by asserting that the
 // span used to trace the execution of the proposal is not used after the
 // proposal has been finished as it would be if the proposal were reproposed
 // after applying locally.

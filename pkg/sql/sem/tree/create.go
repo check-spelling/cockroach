@@ -86,7 +86,7 @@ func (node *CreateDatabase) Format(ctx *FmtCtx) {
 	if node.CType != "" {
 		// NB: the ctype (formatting customization) is not currently
 		// edited out under FmtAnonymize, because we don't support custom
-		// cutomizations. If/when custom customizations are supported,
+		// customizations. If/when custom customizations are supported,
 		// this should call ctx.FormatNode on the ctype expr.
 		ctx.WriteString(" LC_CTYPE = ")
 		lexbase.EncodeSQLStringWithFlags(&ctx.Buffer, node.CType, ctx.flags.EncodeFlags())
@@ -910,7 +910,7 @@ type ColumnCheckConstraint struct {
 	Expr Expr
 }
 
-// ColumnFKConstraint represents a FK-constaint on a column.
+// ColumnFKConstraint represents a FK-constraint on a column.
 type ColumnFKConstraint struct {
 	Table   TableName
 	Col     Name // empty-string means use PK

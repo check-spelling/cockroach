@@ -759,7 +759,7 @@ func TestChangefeedExternalIODisabled(t *testing.T) {
 	})
 
 	withDisabledOutbound := func(args *base.TestServerArgs) { args.ExternalIODirConfig.DisableOutbound = true }
-	t.Run("sinkless changfeeds are allowed with disabled external io",
+	t.Run("sinkless changefeeds are allowed with disabled external io",
 		sinklessTest(func(t *testing.T, db *gosql.DB, f cdctest.TestFeedFactory) {
 			sqlDB := sqlutils.MakeSQLRunner(db)
 			sqlDB.Exec(t, "CREATE TABLE target_table (pk INT PRIMARY KEY)")
@@ -990,7 +990,7 @@ func TestChangefeedSchemaChangeAllowBackfill(t *testing.T) {
 		// we expect the changefeed level backfill to be triggered at the
 		// `ModificationTime` of version 4 of said descriptor. This is because this is the
 		// descriptor version which makes the schema-change level backfill for the
-		// newly-added column public. This means we wil see row updates resulting from the
+		// newly-added column public. This means we will see row updates resulting from the
 		// schema-change level backfill _before_ the changefeed level backfill.
 
 		t.Run(`add column with default`, func(t *testing.T) {
@@ -1078,7 +1078,7 @@ func TestChangefeedSchemaChangeAllowBackfill(t *testing.T) {
 			sqlDB.Exec(t, `INSERT INTO multiple_alters VALUES (1, '1')`)
 			sqlDB.Exec(t, `INSERT INTO multiple_alters VALUES (2, '2')`)
 
-			// Set up a hook to pause the changfeed on the next emit.
+			// Set up a hook to pause the changefeed on the next emit.
 			var wg sync.WaitGroup
 			waitSinkHook := func(_ context.Context) error {
 				wg.Wait()
@@ -1195,7 +1195,7 @@ func TestChangefeedSchemaChangeBackfillScope(t *testing.T) {
 	}
 
 	// TODO(ssd): tenant tests skipped because of f.Server() use
-	// in fetchDescVerionModifationTime
+	// in fetchDescVersionModificationTime
 	t.Run(`sinkless`, sinklessTest(testFn, feedTestNoTenants))
 	t.Run(`enterprise`, enterpriseTest(testFn, feedTestNoTenants))
 	t.Run(`kafka`, kafkaTest(testFn, feedTestNoTenants))
@@ -1501,7 +1501,7 @@ func TestChangefeedFailOnTableOffline(t *testing.T) {
 	t.Run(`webhook`, webhookTest(testFn, feedTestNoTenants))
 }
 
-func TestChangefeedRestartMutliNode(t *testing.T) {
+func TestChangefeedRestartMultiNode(t *testing.T) {
 	defer leaktest.AfterTest(t)()
 	defer log.Scope(t).Close(t)
 
@@ -1675,7 +1675,7 @@ func TestChangefeedWorksOnRBRChange(t *testing.T) {
 		})
 	}
 
-	// Tenants skiped because of:
+	// Tenants skipped because of:
 	//
 	// error executing 'ALTER DATABASE d PRIMARY REGION
 	// "us-east-1"': pq: get_live_cluster_regions: unimplemented:
@@ -2885,7 +2885,7 @@ func TestChangefeedErrors(t *testing.T) {
 	)
 	sqlDB.ExpectErr(
 		t, `param sasl_mechanism must be one of SCRAM-SHA-256, SCRAM-SHA-512, or PLAIN`,
-		`CREATE CHANGEFEED FOR foo INTO $1`, `kafka://nope/?sasl_enabled=true&sasl_mechanism=unsuppported`,
+		`CREATE CHANGEFEED FOR foo INTO $1`, `kafka://nope/?sasl_enabled=true&sasl_mechanism=unsupported`,
 	)
 	sqlDB.ExpectErr(
 		t, `client has run out of available brokers`,
@@ -3581,7 +3581,7 @@ func TestManyChangefeedsOneTable(t *testing.T) {
 	t.Run(`cloudstorage`, cloudStorageTest(testFn))
 	t.Run(`kafka`, kafkaTest(testFn))
 	t.Run(`webhook`, func(t *testing.T) {
-		skip.WithIssue(t, 67034, "flakey test")
+		skip.WithIssue(t, 67034, "flaky test")
 		webhookTest(testFn)(t)
 	})
 }
@@ -3881,7 +3881,7 @@ func TestChangefeedHandlesDrainingNodes(t *testing.T) {
 	sqlDB.Exec(t, "ALTER TABLE test.foo SCATTER")
 
 	// Create a factory which executes the CREATE CHANGEFEED statement on server 0.
-	// This statement should fail, but the job itself ought to be creaated.
+	// This statement should fail, but the job itself ought to be created.
 	// After some time, that job should be adopted by another node, and executed successfully.
 	f := makeCloudFeedFactory(tc.Server(1), tc.ServerConn(0), sinkDir)
 

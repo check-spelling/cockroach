@@ -46,9 +46,9 @@ func TestCreateStatsControlJob(t *testing.T) {
 	// Test with 3 nodes and rowexec.SamplerProgressInterval=100 to ensure
 	// that progress metadata is sent correctly after every 100 input rows.
 	const nodes = 3
-	defer func(oldSamplerInterval int, oldSampleAgggregatorInterval time.Duration) {
+	defer func(oldSamplerInterval int, oldSampleAggregatorInterval time.Duration) {
 		rowexec.SamplerProgressInterval = oldSamplerInterval
-		rowexec.SampleAggregatorProgressInterval = oldSampleAgggregatorInterval
+		rowexec.SampleAggregatorProgressInterval = oldSampleAggregatorInterval
 	}(rowexec.SamplerProgressInterval, rowexec.SampleAggregatorProgressInterval)
 	rowexec.SamplerProgressInterval = 100
 	rowexec.SampleAggregatorProgressInterval = time.Millisecond
@@ -181,7 +181,7 @@ func TestAtMostOneRunningCreateStats(t *testing.T) {
 	// Attempt to start an automatic stats run. It should fail.
 	autoStatsRunShouldFail()
 
-	// PAUSE JOB does not bloack until the job is paused but only requests it.
+	// PAUSE JOB does not block until the job is paused but only requests it.
 	// Wait until the job is set to paused.
 	var jobID jobspb.JobID
 	sqlDB.QueryRow(t, `SELECT id FROM system.jobs ORDER BY created DESC LIMIT 1`).Scan(&jobID)

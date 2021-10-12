@@ -136,7 +136,7 @@ var supportedZoneConfigOptions = map[tree.Name]struct {
 	},
 }
 
-// zoneOptionKeys contains the keys from suportedZoneConfigOptions in
+// zoneOptionKeys contains the keys from supportedZoneConfigOptions in
 // deterministic order. Needed to make the event log output
 // deterministic.
 var zoneOptionKeys = func() []string {
@@ -340,7 +340,7 @@ func (n *setZoneConfigNode) startExec(params runParams) error {
 		default:
 			deleteZone = true
 		}
-		// Trim spaces, to detect empty zonfigurations.
+		// Trim spaces, to detect empty configurations.
 		// We'll add back the missing newline below.
 		yamlConfig = strings.TrimSpace(yamlConfig)
 	}

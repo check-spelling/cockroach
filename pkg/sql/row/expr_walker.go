@@ -218,7 +218,7 @@ func makeImportRand(c *CellInfoAnnotation) randomSource {
 //
 // #default_rowid_cols * rowIndex + colPosition (among those with default unique_rowid)
 //
-// To avoid collisions with the SQL-genenerated IDs (at least for a
+// To avoid collisions with the SQL-generated IDs (at least for a
 // very long time) we also flip the top bit to 1.
 //
 // Producing sequential keys in non-overlapping spans for each source yields
@@ -558,7 +558,7 @@ var useDefaultBuiltin *customFunc
 
 // Given that imports can be retried and resumed, we want to
 // ensure that the default functions return the same value given
-// the same arguments, even on retries. Therfore we decide to support
+// the same arguments, even on retries. Therefore we decide to support
 // only a limited subset of non-immutable functions, which are
 // all listed here.
 var supportedImportFuncOverrides = map[string]*customFunc{

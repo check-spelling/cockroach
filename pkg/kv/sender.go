@@ -63,7 +63,7 @@ type Sender interface {
 	// concurrent requests, it waits for all of them before returning,
 	// even in error cases.
 	//
-	// Once the request reaches the `transport` module, anothern
+	// Once the request reaches the `transport` module, another
 	// restriction applies (particularly relevant for the case when the
 	// node that the transport is talking to is local, and so there's
 	// not gRPC marshaling/unmarshaling):
@@ -246,7 +246,7 @@ type TxnSender interface {
 	// Note that this method allows for false negatives: sometimes the
 	// client only figures out that it's been pushed when it sends an
 	// EndTxn - i.e. it's possible for the txn to have been pushed
-	// asynchoronously by some other operation (usually, but not
+	// asynchronously by some other operation (usually, but not
 	// exclusively, by a high-priority txn with conflicting writes).
 	IsSerializablePushAndRefreshNotPossible() bool
 
